@@ -4,14 +4,19 @@ import { IGetVacationUsecase } from './interfaces/Iget-vacation-usecase';
 import { Vacation } from '../types/Vacation';
 import { getRandomInt } from '../utils/random';
 
-const vacations: Vacation[] = [
-  {
-    image: '',
-    country: '',
-    description: '',
-    budget: ''
-  }
-];
+import vacations from './vacation-data.json';
+
+// const vacations: Vacation[] = [
+//   {
+//     name: 'Santorini',
+//     image: 'https://some-image-link',
+//     country: 'Greece',
+//     description: 'Island in the Aegean Sea with beatiful white houses built on a slope overlooking the water',
+//     budget: '$3000',
+//     thingsToDo: 'surf, eat food',
+//     timeToVisit: 'May - June',
+//   }
+// ];
 
 @injectable()
 export class GetVacationUsecase implements IGetVacationUsecase {

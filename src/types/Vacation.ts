@@ -1,6 +1,9 @@
 export type Vacation = {
-  image: string;
-  country: string;
+  name: string;
   description: string;
+  country: string;
+  image: string;
+  timeToVisit: string;
+  thingsToDo: string;
   budget: string;
 };
