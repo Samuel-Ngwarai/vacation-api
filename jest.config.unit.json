@@ -18,10 +18,12 @@
     "testEnvironment": "node",
     "collectCoverageFrom": [
       "src/**/*.ts",
+      "!src/main.ts",
       "!src/utils/logger.ts",
       "!src/**/__tests__/**",
       "!src/config/**.ts",
       "!src/routes/**.ts",
+      "!src/server/**.ts",
       "!src/containers/*.ts"
     ],
   "errorOnDeprecated": true,
