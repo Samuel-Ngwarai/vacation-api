@@ -22,9 +22,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "types": ["reflect-metadata", "jest"],
-    "lib": ["ES6"]
+    "lib": ["ES6"],
+    "paths": {
+      "@/*": ["./src/*"],
+    }
   },
   "include": [
     "src/**/*",
+    "src/**/*.json"
   ]
 }

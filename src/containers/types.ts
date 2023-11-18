@@ -1,6 +1,6 @@
 const TYPES = {
-  MySimpleUsecaseInterface: Symbol.for('MySimpleUsecaseInterface'),
-  SomeController: Symbol.for('SomeController'),
+  IGetVacationUsecase: Symbol.for('IGetVacationUsecase'),
+  VacationController: Symbol.for('VacationController'),
 };
 
 export { TYPES };

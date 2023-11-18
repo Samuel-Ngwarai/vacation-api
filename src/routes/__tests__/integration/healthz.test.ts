@@ -32,14 +32,14 @@ describe(__filename, () => {
       const res = await request(expressServer).get('/');
 
       expect(res.statusCode).toEqual(404);
-      expect(res.error.text).toEqual('Unknown route called. Try "/simple" for example');
+      expect(res.error.text).toEqual('Unknown route called.');
     });
 
     it('/ random Routes should return error', async () => {
       const res = await request(expressServer).get('/randomRoute');
 
       expect(res.statusCode).toEqual(404);
-      expect(res.error.text).toEqual('Uknown route called. Try "/simple" for example');
+      expect(res.error.text).toEqual('Uknown route called.');
     });
   });
 });

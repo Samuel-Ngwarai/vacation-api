@@ -16,12 +16,17 @@ describe(__filename, () => {
 
   describe('GET', () => {
 
-    describe('/simple', () => {
-      it('/should return simple', async () => {
+    describe('/vacation', () => {
+      it('/should return vacation destination', async () => {
 
-        const res = await request(expressServer).get('/simple');
+        const res = await request(expressServer).get('/vacation');
 
-        expect(res.body).toBe(1);
+        expect(res.body).toStrictEqual({
+          image: '',
+          country: '',
+          description: '',
+          budget: ''
+        });
         expect(res.statusCode).toEqual(200);
       });
     });
