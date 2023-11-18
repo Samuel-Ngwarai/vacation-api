@@ -9,10 +9,25 @@ import { IRoute } from '../routes/routes-i';
 
 import { logger } from '../utils/logger';
 
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Simple Typescript Express Boilerplate',
+      description: 'Do something awesome',
+      contact: {
+        name: 'Samuel Ngwarai',
+        email: 'samngwarai@gmail.com',
+      },
+      servers: ['http://localhost:3001'],
+    },
+  },
+  apis: ['**/*.ts'],
+};
+
 export class Server {
   private server: Express;
   private port: number = config.get('PORT');
-  private createSwaggerFile: boolean= config.get('CREATE_SWAGGER_FILE');
+  private createSwaggerFile: boolean = config.get('CREATE_SWAGGER_FILE');
 
   public constructor() {
     this.server = express();
@@ -44,25 +59,32 @@ export class Server {
   }
 
   public addErrorHandler() {
-    this.server.use((err: any, req: Request, res: Response, _: NextFunction) => {
-      logger.error(err);
+    this.server.use(
+      (err: any, req: Request, res: Response, _: NextFunction) => {
+        logger.error(err);
 
-      const errorObject  = {
-        message: err.message,
-        stack: err.stack,
-        statusCode: err.status
-      };
-      res.status(err.status || 500).send(errorObject);
-    });
+        const errorObject = {
+          message: err.message,
+          stack: err.stack,
+          statusCode: err.status,
+        };
+        res.status(err.status || 500).send(errorObject);
+      }
+    );
   }
 
   public addSwaggerFile() {
     if (this.createSwaggerFile) {
       logger.info('Server::addSwaggerFile, creating swagger file');
-      const swaggerDocument = require('../../../swagger.json');
-      const swaggerDocs = swaggerJsDoc(swaggerDocument);
-      this.server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-      logger.info(`Server::addSwaggerFile, Swagger file running at 'http://localhost:${this.port}/api-docs'`);
+      const swaggerDocs = swaggerJsDoc(swaggerOptions);
+      this.server.use(
+        '/api-docs',
+        swaggerUi.serve,
+        swaggerUi.setup(swaggerDocs)
+      );
+      logger.info(
+        `Server::addSwaggerFile, Swagger file running at 'http://localhost:${this.port}/api-docs'`
+      );
     }
   }
 }

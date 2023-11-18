@@ -1,5 +1,5 @@
 import { Express, Request, Response } from 'express';
-import { SomeController } from '../controllers/some-controller';
+import { VacationController } from '../controllers/vacation-controller';
 import { appContainer } from '../containers/inversify.config';
 
 import { IRoute } from './routes-i';
@@ -7,11 +7,11 @@ import { IRoute } from './routes-i';
 export class Routes implements IRoute {
   constructor() {}
 
-  public register(app: Express, _?: SomeController): void {
-    const someController = appContainer().someController;
+  public register(app: Express, _?: VacationController): void {
+    const vacationController = appContainer().vacationController;
 
     app.get('/', async (_: Request, res: Response) => {
-      res.status(404).send('Unknown route called. Try "/simple" for example');
+      res.status(404).send('Unknown route called.');
     });
 
     app.get('/readyz', async (_: Request, res: Response) => {
@@ -25,19 +25,19 @@ export class Routes implements IRoute {
     /**
      * @swagger
      *
-     * /simple:
+     * /vacation:
      *   get:
-     *     description: Do something simple
+     *     description: Returns random Vacation Destination with image and description 
      *     produces:
      *       - application/json
      *     responses:
      *       200:
      *         description: Successfull Response
      */
-    app.get('/simple', someController.doSomethingSimple.bind(someController));
+    app.get('/vacation', vacationController.getVacation.bind(vacationController));
 
     app.get('*',function (_: Request, res: Response) {
-      res.status(404).send('Uknown route called. Try "/simple" for example');
+      res.status(404).send('Uknown route called.');
     });
   }
 }

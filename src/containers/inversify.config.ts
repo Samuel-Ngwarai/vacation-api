@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { Container } from 'inversify';
 import { TYPES } from './types';
-import { MySimpleUsecaseInterface } from '../usecases/interfaces/Imy-simple-usecase';
-import { MySimpleUsecase } from '../usecases/my-simple-usecase';
-import { SomeController } from '../controllers/some-controller';
+import { IGetVacationUsecase } from '../usecases/interfaces/Iget-vacation-usecase';
+import { GetVacationUsecase } from '../usecases/get-vacation-usecase';
+import { VacationController } from '../controllers/vacation-controller';
 
 
 let _appContainer: Container;
@@ -15,8 +15,8 @@ const initializeAppContainer = () => {
   }
   _appContainer = new Container();
 
-  _appContainer.bind<MySimpleUsecaseInterface>(TYPES.MySimpleUsecaseInterface).to(MySimpleUsecase);
-  _appContainer.bind<SomeController>(TYPES.SomeController).to(SomeController).inSingletonScope();
+  _appContainer.bind<IGetVacationUsecase>(TYPES.IGetVacationUsecase).to(GetVacationUsecase);
+  _appContainer.bind<VacationController>(TYPES.VacationController).to(VacationController).inSingletonScope();
 };
 
 const appContainer = () => {
@@ -25,8 +25,8 @@ const appContainer = () => {
   }
 
   return {
-    someController: _appContainer.get<SomeController>(TYPES.SomeController),
-    mySimpleUsecase: _appContainer.get<MySimpleUsecaseInterface>(TYPES.MySimpleUsecaseInterface),
+    vacationController: _appContainer.get<VacationController>(TYPES.VacationController),
+    vacationUsecase: _appContainer.get<IGetVacationUsecase>(TYPES.IGetVacationUsecase),
   };
 };
 
