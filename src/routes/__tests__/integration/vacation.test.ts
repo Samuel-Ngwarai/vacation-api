@@ -22,10 +22,13 @@ describe(__filename, () => {
         const res = await request(expressServer).get('/vacation');
 
         expect(res.body).toStrictEqual({
-          image: '',
-          country: '',
-          description: '',
-          budget: ''
+          name: expect.any(String),
+          image: expect.any(String),
+          country: expect.any(String),
+          description: expect.any(String),
+          budget: expect.any(String),
+          thingsToDo: expect.any(String),
+          timeToVisit: expect.any(String),
         });
         expect(res.statusCode).toEqual(200);
       });
